@@ -16,7 +16,7 @@ const formatted = new Date(date).toLocaleDateString('en-US', {
 }).replace(/\//g, '.');
 ---
 
-<a href={`/blog/${slug}`} class="group block py-6">
+<div class="pt-6 pb-8">
   <time
     datetime={date.toISOString()}
     class="block text-xs mb-2 tabular-nums"
@@ -24,18 +24,20 @@ const formatted = new Date(date).toLocaleDateString('en-US', {
   >
     {formatted}
   </time>
-  <h3 class="text-lg font-semibold tracking-tight leading-snug group-hover:underline decoration-1 underline-offset-3">
-    {title}
-  </h3>
+  <a href={`/blog/${slug}`} class="group">
+    <h3 class="text-lg font-semibold tracking-tight leading-snug group-hover:underline decoration-1 underline-offset-3">
+      {title}
+    </h3>
+  </a>
   <p class="mt-2 text-sm leading-relaxed" style={`color: var(--color-text-secondary);`}>
     {description}
   </p>
   {tags.length > 0 && (
-    <div class="flex flex-wrap gap-1.5 mt-3">
+    <div class="flex flex-wrap gap-2 mt-3">
       {tags.map((tag: string) => (
         <a
           href={`/blog/tags/${tag}`}
-          class="text-xs font-medium px-2.5 py-0.5 rounded-full hover:opacity-70 transition-opacity"
+          class="text-xs font-medium px-3 py-1 rounded-full inline-block leading-none hover:opacity-70 transition-opacity"
           style={`background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border);`}
         >
           {tag}
@@ -43,4 +45,4 @@ const formatted = new Date(date).toLocaleDateString('en-US', {
       ))}
     </div>
   )}
-</a>
+</div>
