@@ -33,12 +33,13 @@ const formatted = new Date(date).toLocaleDateString('en-US', {
   {tags.length > 0 && (
     <div class="flex flex-wrap gap-1.5 mt-3">
       {tags.map((tag: string) => (
-        <span
-          class="text-xs font-medium px-2.5 py-0.5 rounded-full"
+        <a
+          href={`/blog/tags/${tag}`}
+          class="text-xs font-medium px-2.5 py-0.5 rounded-full hover:opacity-70 transition-opacity"
           style={`background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border);`}
         >
           {tag}
-        </span>
+        </a>
       ))}
     </div>
   )}

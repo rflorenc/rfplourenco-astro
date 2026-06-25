@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = 'Personal site and blog by Ricardo Lourenço',
+  description = "Ricardo's Engineering Blog — Kubernetes, OpenShift, and cloud-native infrastructure",
   image = '/images/og-default.png',
 } = Astro.props;
 
@@ -27,14 +27,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap"
       rel="stylesheet"
     />
     <link rel="canonical" href={canonicalURL} />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="rfplourenco blog"
+      title="re:shift"
       href="/rss.xml"
     />
     <meta name="description" content={description} />

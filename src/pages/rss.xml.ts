@@ -7,8 +7,8 @@ export async function GET(context: APIContext) {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return rss({
-    title: 'rfplourenco',
-    description: 'Writing about software engineering, Kubernetes, and cloud infrastructure',
+    title: "re:shift",
+    description: 'Kubernetes, OpenShift, and cloud-native infrastructure',
     site: context.site!,
     items: posts.map((post) => ({
       title: post.data.title,

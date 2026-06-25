@@ -16,7 +16,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={`${title} — rfplourenco`} description={description}>
+<BaseLayout title={`${title} — re:shift`} description={description}>
   <article class="mx-auto max-w-3xl px-6 py-16 md:py-24">
     <header class="mb-12">
       <a
@@ -39,12 +39,13 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
       {tags.length > 0 && (
         <div class="flex flex-wrap gap-1.5 mt-4">
           {tags.map((tag: string) => (
-            <span
-              class="text-xs font-medium px-2.5 py-0.5 rounded-full"
+            <a
+              href={`/blog/tags/${tag}`}
+              class="text-xs font-medium px-2.5 py-0.5 rounded-full hover:opacity-70 transition-opacity"
               style={`background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border);`}
             >
               {tag}
-            </span>
+            </a>
           ))}
         </div>
       )}

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title={`${tag} — Ricardo's Engineering Blog`}>
+  <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
+    <a
+      href="/blog"
+      class="inline-block text-sm mb-8 hover:underline decoration-1 underline-offset-2"
+      style={`color: var(--color-text-secondary);`}
+    >
+      &larr; All posts
+    </a>
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tighter">
+      Posts tagged: <span style={`color: var(--color-accent);`}>{tag}</span>
+    </h1>
+    <div class="mt-8">
+      {posts.map((post: any, i: number) => (
+        <div>
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.slug}
+            tags={post.data.tags}
+          />
+          {i < posts.length - 1 && (
+            <hr style={`border: none; border-top: 1px solid var(--color-border);`} />
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
