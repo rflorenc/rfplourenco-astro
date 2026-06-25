@@ -1,0 +1,56 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} — rfplourenco`} description={description}>
+  <article class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <header class="mb-12">
+      <a
+        href="/blog"
+        class="inline-block text-sm mb-8 hover:underline decoration-1 underline-offset-2"
+        style={`color: var(--color-text-secondary);`}
+      >
+        &larr; Back to blog
+      </a>
+      <time
+        datetime={date.toISOString()}
+        class="block text-sm mb-3"
+        style={`color: var(--color-text-secondary);`}
+      >
+        {formattedDate}
+      </time>
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter leading-tight">
+        {title}
+      </h1>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5 mt-4">
+          {tags.map((tag: string) => (
+            <span
+              class="text-xs font-medium px-2.5 py-0.5 rounded-full"
+              style={`background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border);`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+}
+
+const { title, description, slug } = Astro.props;
+---
+
+<a href={`/blog/${slug}`} class="group block py-12 md:py-16">
+  <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter leading-tight group-hover:underline decoration-1 underline-offset-8">
+    {title}
+  </h2>
+  <p class="mt-4 text-base md:text-lg leading-relaxed max-w-2xl" style={`color: var(--color-text-secondary);`}>
+    {description}
+  </p>
+  <span class="inline-block mt-5 text-sm font-medium" style={`color: var(--color-accent);`}>
+    Read article &rarr;
+  </span>
+</a>

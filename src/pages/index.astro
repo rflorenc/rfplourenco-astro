@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedPost from '../components/FeaturedPost.astro';
+import BlogCard from '../components/BlogCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const [latestPost, ...recentPosts] = allPosts;
+const displayPosts = recentPosts.slice(0, 3);
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<BaseLayout title="rfplourenco — Software Engineer">
+  <div class="mx-auto max-w-5xl px-6">
+
+    <section class="pt-16 pb-12 md:pt-24 md:pb-16">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter leading-none">
+        Ricardo Lourenço
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed max-w-xl" style={`color: var(--color-text-secondary);`}>
+        Software engineer working on Kubernetes, containers, and cloud infrastructure.
+      </p>
+    </section>
+
+    <hr style={`border: none; border-top: 1px solid var(--color-border);`} />
+
+    {latestPost && (
+      <section>
+        <FeaturedPost
+          title={latestPost.data.title}
+          description={latestPost.data.description}
+          slug={latestPost.slug}
+        />
+      </section>
+    )}
+
+    <hr style={`border: none; border-top: 1px solid var(--color-border);`} />
+
+    {displayPosts.length > 0 && (
+      <section class="py-12 md:py-16">
+        <h2 class="text-xs font-semibold uppercase tracking-widest mb-2" style={`color: var(--color-text-secondary);`}>
+          Latest Posts
+        </h2>
+        {displayPosts.map((post, i) => (
+          <div>
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              slug={post.slug}
+              tags={post.data.tags}
+            />
+            {i < displayPosts.length - 1 && (
+              <hr style={`border: none; border-top: 1px solid var(--color-border);`} />
+            )}
+          </div>
+        ))}
+        <a
+          href="/blog"
+          class="inline-block mt-4 text-sm font-medium hover:underline decoration-1 underline-offset-2"
+          style={`color: var(--color-accent);`}
+        >
+          See all posts &rarr;
+        </a>
+      </section>
+    )}
+
+    <hr style={`border: none; border-top: 1px solid var(--color-border);`} />
+
+    {projects.length > 0 && (
+      <section class="py-12 md:py-16">
+        <h2 class="text-xs font-semibold uppercase tracking-widest mb-2" style={`color: var(--color-text-secondary);`}>
+          Projects
+        </h2>
+        {projects.map((project, i) => (
+          <div>
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              tech={project.data.tech}
+              url={project.data.url}
+              repo={project.data.repo}
+            />
+            {i < projects.length - 1 && (
+              <hr style={`border: none; border-top: 1px solid var(--color-border);`} />
+            )}
+          </div>
+        ))}
+        <a
+          href="/projects"
+          class="inline-block mt-4 text-sm font-medium hover:underline decoration-1 underline-offset-2"
+          style={`color: var(--color-accent);`}
+        >
+          See all projects &rarr;
+        </a>
+      </section>
+    )}
+  </div>
+</BaseLayout>

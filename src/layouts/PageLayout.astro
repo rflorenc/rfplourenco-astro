@@ -1,0 +1,17 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const { title, description, wide = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class:list={['mx-auto px-6 py-16 md:py-24', wide ? 'max-w-5xl' : 'max-w-3xl']}>
+    <slot />
+  </section>
+</BaseLayout>
