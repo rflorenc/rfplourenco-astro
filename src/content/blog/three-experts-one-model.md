@@ -27,7 +27,7 @@ Imagine you are looking at unusual network traffic and you want to know if it is
 
 Each perspective examines different evidence, applies different domain knowledge, and reaches its own conclusion. Then you take the majority vote. If two out of three say "anomaly," that is your answer with 66.7% confidence. If all three agree, you are at 100%.
 
-The formal algorithm looks like this:
+The pseudocode algorithm looks like this:
 
 ```
 Algorithm 1: Self-Consistency Multi-Perspective Reasoning
