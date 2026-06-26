@@ -67,6 +67,6 @@ The expert panel in stage one actually benefits from being general-purpose. You 
 
 A verifier fine-tuned on thousands of labeled log anomalies would have that knowledge. It would know that a specific combination of packet sizes and port numbers is a well-documented attack signature, not an ambiguous edge case. This creates an asymmetric architecture: general-purpose models generating diverse expert analyses in stage one, and a specialized model rendering authoritative verdicts in stage two. We have not tested this yet, but the behavioral data strongly suggests it would collapse the uncertainty rates that currently separate the best models from the rest.
 
-The formal algorithms for the multi-perspective reasoning and verifier feedback pipeline are described in the [previous post](/blog/three-experts-one-model/).
+The pseudocode algorithms for the multi-perspective reasoning and verifier feedback pipeline are described in the [previous post](/blog/three-experts-one-model/).
 
 The SCARLOG framework and all evaluation code are available at [github.com/rflorenc/SCARLOG](https://github.com/rflorenc/SCARLOG).
