@@ -81,6 +81,18 @@ Before deploying a model for a classification, verification, or decision-support
 
 And do not assume that bigger is better. A well-trained 2-billion-parameter model that was explicitly designed for structured reasoning will outperform an 8-billion-parameter model that was trained for general-purpose conversation. The architecture and training methodology of the model determine its behavior in your pipeline far more than the number of parameters it contains.
 
+## What a fine-tuned verifier could change
+
+Every model in our evaluation was a general-purpose model. None were specifically fine-tuned for log anomaly detection as a task. Whether any of them encountered log data during pre-training is a different question, and the answer depends on which model you ask about. IBM Granite and NVIDIA OpenReasoning-Nemotron have fully documented training datasets with permissive licensing. HuggingFace SmolLM2 also discloses its pre-training and fine-tuning data. But DeepSeek and Meta Llama do not disclose their training corpora in any meaningful detail, and Mistral and NVIDIA Hymba fall somewhere in between with partial descriptions. For the undisclosed models, we simply cannot rule out that system logs, network traffic data, or similar operational text was part of their training. What we can say is that none of them were trained with a log anomaly classification objective. This distinction matters most at the verification stage, because the verifier is the single point that determines the final verdict.
+
+The expert panel in stage one actually benefits from being general-purpose. You want broad, varied perspectives there. A network security expert prompt and a threat hunter prompt produce more interesting disagreements when the model behind them has wide-ranging knowledge rather than narrow specialization. Diversity in the first stage is a feature, not a limitation.
+
+The verifier is a different story. Its job is not to explore possibilities. Its job is to render a definitive judgment on whether the reasoning holds up. That requires domain confidence. When Llama-3.1-8B returns UNCERTAIN on 100% of UNSW-NB15 samples, it is not confused about the reasoning quality. It lacks the domain knowledge to commit. It does not know what a genuine network intrusion pattern looks like versus a noisy false positive, so it hedges.
+
+A verifier fine-tuned on thousands of labeled log anomalies would have that knowledge. It would know that a specific combination of packet sizes and port numbers is a well-documented attack signature, not an ambiguous edge case. It would know that certain HDFS block operation sequences always indicate corruption. That domain grounding would let it commit to CONFIRM or REJECT instead of defaulting to UNCERTAIN.
+
+This creates an asymmetric architecture: general-purpose models generating diverse expert analyses in stage one, and a specialized model rendering authoritative verdicts in stage two. The first stage stays cheap and flexible. The second stage gets the fine-tuned precision that matters for production reliability. We have not tested this yet, but the behavioral data strongly suggests it would collapse the uncertainty rates that currently separate the best models from the rest.
+
 The formal algorithms for the multi-perspective reasoning and verifier feedback pipeline are described in the [previous post](/blog/three-experts-one-model/).
 
 The SCARLOG framework and all evaluation code are available at [github.com/rflorenc/SCARLOG](https://github.com/rflorenc/SCARLOG).
