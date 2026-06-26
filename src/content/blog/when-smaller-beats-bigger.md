@@ -83,4 +83,4 @@ And do not assume that bigger is better. A well-trained 2-billion-parameter mode
 
 The formal algorithms for the multi-perspective reasoning and verifier feedback pipeline are described in the [previous post](/blog/three-experts-one-model/).
 
-This post is based on research conducted at the University of Leeds, published as "Self-Consistent Log Anomaly Detection with Small Language Models: A Verifier Feedback Approach." The SCARLOG framework and all evaluation code are available at [github.com/rflorenc/SCARLOG](https://github.com/rflorenc/SCARLOG).
+The SCARLOG framework and all evaluation code are available at [github.com/rflorenc/SCARLOG](https://github.com/rflorenc/SCARLOG).

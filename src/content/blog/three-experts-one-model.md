@@ -131,4 +131,4 @@ The hardest part is not the code. It is choosing good expert perspectives. The p
 
 In the [next post](/blog/when-smaller-beats-bigger/), we look at what happened when we evaluated ten different models through this pipeline, and why a 2-billion-parameter model outperformed one four times its size.
 
-This post is based on research conducted at the University of Leeds. The SCARLOG framework is available at [github.com/rflorenc/SCARLOG](https://github.com/rflorenc/SCARLOG).
+The SCARLOG framework is available at [github.com/rflorenc/SCARLOG](https://github.com/rflorenc/SCARLOG).
