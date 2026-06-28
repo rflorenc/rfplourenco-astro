@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="ovsGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="gpuGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="nicGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#0e7490"/>
+    </linearGradient>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+    <filter id="shadowSm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="680" rx="12" fill="#f8fafc"/>
+  <rect x="0" y="0" width="900" height="52" rx="12" fill="url(#headerGrad)"/>
+  <rect x="0" y="40" width="900" height="12" fill="url(#headerGrad)"/>
+  <text x="450" y="33" text-anchor="middle" fill="#fff" font-size="16" font-weight="600" letter-spacing="0.5">GPU Cluster Networking with GPUDirect RDMA and Storage</text>
+
+  <!-- Pod boundary -->
+  <rect x="30" y="70" width="540" height="210" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="94" fill="#475569" font-size="11" font-weight="600" letter-spacing="1" text-transform="uppercase">POD</text>
+
+  <!-- Containers -->
+  <rect x="50" y="105" width="500" height="50" rx="6" fill="#fff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadowSm)"/>
+  <text x="300" y="135" text-anchor="middle" fill="#64748b" font-size="13" font-weight="500">container-m</text>
+
+  <rect x="50" y="160" width="500" height="50" rx="6" fill="#fff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadowSm)"/>
+  <text x="300" y="190" text-anchor="middle" fill="#64748b" font-size="13" font-weight="500">container-1</text>
+
+  <!-- container-0 with interfaces -->
+  <rect x="50" y="215" width="500" height="55" rx="6" fill="#fff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <text x="70" y="240" fill="#334155" font-size="13" font-weight="600">container-0</text>
+
+  <!-- eth0 -->
+  <rect x="165" y="230" width="52" height="28" rx="4" fill="url(#ovsGrad)"/>
+  <text x="191" y="249" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">eth0</text>
+
+  <!-- net0 -->
+  <rect x="227" y="230" width="52" height="28" rx="4" fill="#7c3aed"/>
+  <text x="253" y="249" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">net0</text>
+
+  <!-- net1 -->
+  <rect x="289" y="230" width="52" height="28" rx="4" fill="#7c3aed"/>
+  <text x="315" y="249" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">net1</text>
+
+  <!-- Multus + GDS labels -->
+  <rect x="365" y="224" width="70" height="20" rx="10" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="400" y="238" text-anchor="middle" fill="#6d28d9" font-size="9" font-weight="600">MULTUS</text>
+
+  <rect x="445" y="224" width="50" height="20" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="470" y="238" text-anchor="middle" fill="#166534" font-size="9" font-weight="600">GDS</text>
+
+  <!-- VLAN label -->
+  <rect x="365" y="250" width="90" height="16" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="410" y="261" text-anchor="middle" fill="#92400e" font-size="8" font-weight="600">VLAN 1155</text>
+
+  <!-- OVS block -->
+  <rect x="30" y="320" width="130" height="70" rx="8" fill="url(#ovsGrad)" filter="url(#shadow)"/>
+  <text x="95" y="352" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">OVS</text>
+  <text x="95" y="370" text-anchor="middle" fill="#94a3b8" font-size="9">Open vSwitch</text>
+
+  <!-- Connection: eth0 to OVS -->
+  <line x1="191" y1="258" x2="191" y2="290" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="191" y1="290" x2="95" y2="290" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="95" y1="290" x2="95" y2="320" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="100" y="303" fill="#64748b" font-size="8">Mgmt</text>
+
+  <!-- SR-IOV CNI labels -->
+  <rect x="195" y="310" width="90" height="28" rx="6" fill="#312e81" filter="url(#shadowSm)"/>
+  <text x="240" y="329" text-anchor="middle" fill="#c7d2fe" font-size="10" font-weight="600">SR-IOV CNI</text>
+
+  <rect x="315" y="310" width="90" height="28" rx="6" fill="#312e81" filter="url(#shadowSm)"/>
+  <text x="360" y="329" text-anchor="middle" fill="#c7d2fe" font-size="10" font-weight="600">SR-IOV CNI</text>
+
+  <!-- IPVLAN CNI -->
+  <rect x="435" y="310" width="90" height="28" rx="6" fill="#164e63" filter="url(#shadowSm)"/>
+  <text x="480" y="329" text-anchor="middle" fill="#a5f3fc" font-size="10" font-weight="600">IPVLAN CNI</text>
+
+  <!-- Connection: net0 to SR-IOV CNI left -->
+  <line x1="253" y1="258" x2="253" y2="285" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="253" y1="285" x2="240" y2="285" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="240" y1="285" x2="240" y2="310" stroke="#7c3aed" stroke-width="1.5"/>
+
+  <!-- Connection: net1 to SR-IOV CNI right -->
+  <line x1="315" y1="258" x2="315" y2="282" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="315" y1="282" x2="360" y2="282" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="360" y1="282" x2="360" y2="310" stroke="#7c3aed" stroke-width="1.5"/>
+
+  <!-- Connection: GDS/VLAN to IPVLAN -->
+  <line x1="480" y1="266" x2="480" y2="310" stroke="#0891b2" stroke-width="1.5"/>
+
+  <!-- VF labels -->
+  <rect x="200" y="360" width="50" height="22" rx="4" fill="#4338ca"/>
+  <text x="225" y="375" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">VF3</text>
+
+  <rect x="320" y="360" width="50" height="22" rx="4" fill="#4338ca"/>
+  <text x="345" y="375" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">VF4</text>
+
+  <rect x="440" y="360" width="50" height="22" rx="4" fill="#0e7490"/>
+  <text x="465" y="375" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">VFn</text>
+
+  <!-- Lines from SR-IOV/IPVLAN to VFs -->
+  <line x1="240" y1="338" x2="225" y2="360" stroke="#4338ca" stroke-width="1.5"/>
+  <line x1="360" y1="338" x2="345" y2="360" stroke="#4338ca" stroke-width="1.5"/>
+  <line x1="480" y1="338" x2="465" y2="360" stroke="#0e7490" stroke-width="1.5"/>
+
+  <!-- Annotation boxes -->
+  <!-- Left annotation: RDMA VFs -->
+  <rect x="600" y="80" width="270" height="70" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowSm)"/>
+  <text x="615" y="100" fill="#1e40af" font-size="10" font-weight="600">RDMA Virtual Functions</text>
+  <text x="615" y="115" fill="#3b82f6" font-size="9">Pods get CX7 RDMA VFs for GPUDirect.</text>
+  <text x="615" y="128" fill="#3b82f6" font-size="9">Allocated via SR-IOV device plugin, gated</text>
+  <text x="615" y="141" fill="#3b82f6" font-size="9">by Gatekeeper policy on namespace tier.</text>
+
+  <!-- Right annotation: GDS -->
+  <rect x="600" y="165" width="270" height="70" rx="8" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1" filter="url(#shadowSm)"/>
+  <text x="615" y="185" fill="#065f46" font-size="10" font-weight="600">GPUDirect Storage Path</text>
+  <text x="615" y="200" fill="#059669" font-size="9">Pods get GDS over RDMA through additional</text>
+  <text x="615" y="213" fill="#059669" font-size="9">SR-IOV VFs. IPVLAN on dedicated interface,</text>
+  <text x="615" y="226" fill="#059669" font-size="9">VLAN 1155 for traffic isolation.</text>
+
+  <!-- Dashed connector lines to annotations -->
+  <line x1="570" y1="240" x2="600" y2="115" stroke="#93c5fd" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="570" y1="252" x2="600" y2="200" stroke="#6ee7b7" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Hardware layer -->
+  <rect x="30" y="410" width="540" height="30" rx="0" fill="none"/>
+  <line x1="30" y1="410" x2="570" y2="410" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="300" y="430" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="2">PHYSICAL HARDWARE</text>
+
+  <!-- NIC cards -->
+  <!-- Mgmt NIC -->
+  <rect x="40" y="450" width="110" height="70" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <rect x="40" y="450" width="110" height="22" rx="8" fill="#64748b"/>
+  <rect x="40" y="462" width="110" height="10" rx="0" fill="#64748b"/>
+  <text x="95" y="466" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">Mgmt NIC</text>
+  <text x="95" y="495" text-anchor="middle" fill="#475569" font-size="9">Management</text>
+  <text x="95" y="508" text-anchor="middle" fill="#475569" font-size="9">Network</text>
+
+  <!-- ConnectX-7 RDMA NIC -->
+  <rect x="170" y="450" width="130" height="70" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <rect x="170" y="450" width="130" height="22" rx="8" fill="#7c3aed"/>
+  <rect x="170" y="462" width="130" height="10" rx="0" fill="#7c3aed"/>
+  <text x="235" y="466" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">RDMA NIC</text>
+  <text x="235" y="490" text-anchor="middle" fill="#5b21b6" font-size="10" font-weight="700">ConnectX-7</text>
+  <text x="235" y="508" text-anchor="middle" fill="#7c3aed" font-size="8">400 Gb/s</text>
+
+  <!-- ConnectX-6 host bond -->
+  <rect x="320" y="450" width="130" height="70" rx="8" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <rect x="320" y="450" width="130" height="22" rx="8" fill="#059669"/>
+  <rect x="320" y="462" width="130" height="10" rx="0" fill="#059669"/>
+  <text x="385" y="466" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">host bond</text>
+  <text x="385" y="490" text-anchor="middle" fill="#065f46" font-size="10" font-weight="700">ConnectX-6</text>
+  <text x="385" y="508" text-anchor="middle" fill="#059669" font-size="8">GDS / Storage</text>
+
+  <!-- ConnectX-6 second -->
+  <rect x="470" y="450" width="100" height="70" rx="8" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <rect x="470" y="450" width="100" height="22" rx="8" fill="#059669"/>
+  <rect x="470" y="462" width="100" height="10" rx="0" fill="#059669"/>
+  <text x="520" y="466" text-anchor="middle" fill="#fff" font-size="9" font-weight="600">NIC</text>
+  <text x="520" y="490" text-anchor="middle" fill="#065f46" font-size="10" font-weight="700">ConnectX-6</text>
+  <text x="520" y="508" text-anchor="middle" fill="#059669" font-size="8">GDS / Storage</text>
+
+  <!-- Lines from VFs to NICs -->
+  <line x1="95" y1="390" x2="95" y2="450" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="225" y1="382" x2="235" y2="450" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="345" y1="382" x2="385" y2="450" stroke="#059669" stroke-width="2"/>
+  <line x1="465" y1="382" x2="520" y2="450" stroke="#059669" stroke-width="2"/>
+
+  <!-- GPU cards at bottom -->
+  <rect x="30" y="550" width="540" height="30" rx="0" fill="none"/>
+  <line x1="30" y1="548" x2="570" y2="548" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="300" y="568" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="2">GPU DEVICES</text>
+
+  <!-- GPU cards -->
+  <rect x="55" y="585" width="90" height="65" rx="8" fill="url(#gpuGrad)" filter="url(#shadow)"/>
+  <text x="100" y="612" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">GPU 0</text>
+  <text x="100" y="628" text-anchor="middle" fill="#a7f3d0" font-size="8">NVLink</text>
+  <rect x="70" y="637" width="60" height="4" rx="2" fill="#34d399" opacity="0.6"/>
+
+  <rect x="175" y="585" width="90" height="65" rx="8" fill="url(#gpuGrad)" filter="url(#shadow)"/>
+  <text x="220" y="612" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">GPU 1</text>
+  <text x="220" y="628" text-anchor="middle" fill="#a7f3d0" font-size="8">NVLink</text>
+  <rect x="190" y="637" width="60" height="4" rx="2" fill="#34d399" opacity="0.6"/>
+
+  <rect x="295" y="585" width="90" height="65" rx="8" fill="url(#gpuGrad)" filter="url(#shadow)"/>
+  <text x="340" y="612" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">GPU 2</text>
+  <text x="340" y="628" text-anchor="middle" fill="#a7f3d0" font-size="8">NVLink</text>
+  <rect x="310" y="637" width="60" height="4" rx="2" fill="#34d399" opacity="0.6"/>
+
+  <rect x="415" y="585" width="90" height="65" rx="8" fill="url(#gpuGrad)" filter="url(#shadow)"/>
+  <text x="460" y="612" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">GPU n</text>
+  <text x="460" y="628" text-anchor="middle" fill="#a7f3d0" font-size="8">NVLink</text>
+  <rect x="430" y="637" width="60" height="4" rx="2" fill="#34d399" opacity="0.6"/>
+
+  <!-- NVLink interconnect bar -->
+  <rect x="55" y="656" width="450" height="6" rx="3" fill="#34d399" opacity="0.3"/>
+  <text x="300" y="674" text-anchor="middle" fill="#059669" font-size="8" font-weight="600">NVLink 4.0 Mesh (900 GB/s bidirectional)</text>
+
+  <!-- GDR arrows from NICs to GPUs -->
+  <line x1="235" y1="520" x2="160" y2="585" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="235" y1="520" x2="270" y2="585" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="175" y="555" fill="#7c3aed" font-size="8" font-weight="600" transform="rotate(-25, 175, 555)">GDR</text>
+  <text x="270" y="555" fill="#7c3aed" font-size="8" font-weight="600" transform="rotate(10, 270, 555)">GDR</text>
+
+  <line x1="385" y1="520" x2="340" y2="585" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="520" y1="520" x2="460" y2="585" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="350" y="555" fill="#059669" font-size="8" font-weight="600" transform="rotate(-15, 350, 555)">GDS</text>
+  <text x="495" y="555" fill="#059669" font-size="8" font-weight="600" transform="rotate(-20, 495, 555)">GDS</text>
+
+  <!-- Legend -->
+  <rect x="600" y="450" width="270" height="170" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="620" y="474" fill="#334155" font-size="11" font-weight="700">Network Paths</text>
+
+  <rect x="620" y="490" width="12" height="12" rx="2" fill="#64748b"/>
+  <text x="640" y="501" fill="#475569" font-size="10">OVS management (eth0)</text>
+
+  <rect x="620" y="512" width="12" height="12" rx="2" fill="#7c3aed"/>
+  <text x="640" y="523" fill="#475569" font-size="10">SR-IOV RDMA / GDR (net0, net1)</text>
+
+  <rect x="620" y="534" width="12" height="12" rx="2" fill="#059669"/>
+  <text x="640" y="545" fill="#475569" font-size="10">IPVLAN GDS / Storage (VFn)</text>
+
+  <rect x="620" y="556" width="12" height="12" rx="2" fill="#34d399"/>
+  <text x="640" y="567" fill="#475569" font-size="10">NVLink intra-node mesh</text>
+
+  <line x1="620" y1="580" x2="850" y2="580" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="620" y="598" fill="#94a3b8" font-size="9" font-weight="600">Policy</text>
+  <text x="620" y="612" fill="#64748b" font-size="9">Gatekeeper (OPA) enforces namespace</text>
+
+</svg>
