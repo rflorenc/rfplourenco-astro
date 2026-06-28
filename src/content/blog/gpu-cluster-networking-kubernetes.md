@@ -52,7 +52,7 @@ The result: three distinct network paths per pod. OVS for management, SR-IOV VFs
 
 ## Parallelism Strategies and Network Requirements
 
-How you split a model across GPUs determines your network requirements.
+How you split a model across GPUs often determines your network requirements.
 
 **Tensor parallelism (TP)** divides individual layers across GPUs. Every GPU holds a slice of every layer and must synchronize on every forward and backward pass. This requires the fastest interconnect available: [NVLink 4.0 at 900 GB/s bidirectional](https://www.nvidia.com/en-us/data-center/nvlink/) within a node, ideally InfiniBand with GDR across nodes. TP typically stays within a single node.
 
