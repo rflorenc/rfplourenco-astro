@@ -15,9 +15,9 @@ The GPU communication stack has five layers.
 
 At the bottom, [OFED (OpenFabrics Enterprise Distribution)](https://network.nvidia.com/products/infiniband-drivers/linux/mlnx_ofed/) provides the kernel modules and userspace libraries such as libibverbs and librdmacm that expose RDMA capabilities. NVIDIA ships MLNX_OFED as their certified distribution with added firmware and diagnostics for ConnectX NICs. On clusters with BlueField DPUs, [DOCA](https://developer.nvidia.com/networking/doca) replaces OFED, letting the SmartNIC itself run an OS and offload networking, security, and storage.
 
-Above the drivers sit the network adapters. [NVIDIA ConnectX-7 NICs](https://www.nvidia.com/content/dam/en-zz/Solutions/networking/infiniband/connectx-7-datasheet.pdf) support 400 Gb/s per port over InfiniBand or Ethernet, with hardware support for RDMA, GPUDirect, and SR-IOV (presenting a single physical NIC as multiple virtual functions for per-container direct access).
+Above the drivers we have the network adapters. [NVIDIA ConnectX-7 NICs](https://www.nvidia.com/content/dam/en-zz/Solutions/networking/infiniband/connectx-7-datasheet.pdf) support 400 Gb/s per port over InfiniBand or Ethernet, with hardware support for RDMA, GPUDirect, and SR-IOV, presenting a single physical NIC as multiple virtual functions for per-container direct access.
 
-The transport layer moves data between nodes. [InfiniBand NDR](https://www.nvidia.com/en-us/networking/products/infiniband/) provides 400 Gb/s per port with the lowest latency available. [RoCE (RDMA over Converged Ethernet)](https://docs.nvidia.com/networking/display/rdmacore60/RoCE+Configuration) runs RDMA on standard Ethernet using UDP/IP, making it routable across L3 networks at slightly higher latency. Both bypass the CPU and OS kernel: the NIC reads from and writes to remote memory directly.
+The transport layer is what moves data between nodes. [InfiniBand NDR](https://www.nvidia.com/en-us/networking/products/infiniband/) provides ~400 Gb/s per port with the lowest latency available. [RoCE (RDMA over Converged Ethernet)](https://docs.nvidia.com/networking/display/rdmacore60/RoCE+Configuration) runs RDMA on standard Ethernet using UDP/IP, making it routable across L3 networks. Both bypass the CPU and OS kernel: the NIC reads from and writes to remote memory directly.
 
 Nvidia's [NCCL](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/overview.html) communication libraries sit on top, handling multi-GPU collective operations (all-reduce, broadcast) and is the default backend for PyTorch distributed training. [UCX](https://openucx.org/) works underneath, automatically selecting the best transport: shared memory intra-node, RDMA inter-node. [NVSHMEM](https://developer.nvidia.com/nvshmem) provides one-sided GPU-to-GPU memory access without CPU involvement. [NIXL](https://developer.nvidia.com/blog/enhancing-distributed-inference-performance-with-the-nvidia-inference-transfer-library/) is built for inference, enabling [disaggregated serving in vLLM](https://docs.vllm.ai/en/stable/features/nixl_connector_usage/) where prefill and decode run on separate GPUs with KV-cache transferred between them.
 
@@ -61,11 +61,11 @@ How you split a model across GPUs determines your network requirements.
 
 **Data parallelism (DP)** is the simplest form: every GPU holds a full model copy and processes different batches, synchronizing gradients via all-reduce after each step. DP is the most tolerant of network latency since synchronization happens once per training step.
 
-In practice, large-scale training combines all four: TP within a node over NVLink, PP across nodes over InfiniBand, EP across expert-hosting nodes, DP across remaining replicas.
+In practice, large-scale training can potentially combine all four: TP within a node over NVLink, PP across nodes over InfiniBand, EP across expert-hosting nodes, DP across remaining replicas.
 
 ## Scaling Beyond a Single Node
 
-On a single 8-GPU node, NVLink handles all GPU-to-GPU communication. The [NVIDIA GPU Operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/overview.html) manages driver installation, device plugins, and NCCL configuration. This is sufficient for serving most models up to roughly 70B parameters.
+On a single 8-GPU node, NVLink handles all GPU-to-GPU communication. The [NVIDIA GPU Operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/overview.html) manages driver installation, device plugins, and NCCL configuration.  
 
 Multi-node changes the picture. [NVSwitch](https://www.nvidia.com/en-us/data-center/nvlink/) now extends across nodes via the NVLink Switch architecture, providing NVLink-speed connectivity between GPUs in different chassis and eliminating the bandwidth cliff at node boundaries.
 
@@ -75,4 +75,4 @@ The [NVIDIA Network Operator](https://docs.nvidia.com/networking/display/cokan10
 
 ## Closing Thoughts
 
-The communication stack from OFED drivers through ConnectX NICs, RDMA transport, and NCCL collectives determines whether GPUs compute or wait. Getting container networking right with Multus, SR-IOV, and GPUDirect is not optional infrastructure work. It is the architecture that makes GPU-accelerated workloads on Kubernetes viable.
+In short and after all the technical jargon and "hyperlink soup", the communication stack from OFED drivers through ConnectX NICs, RDMA transport, and NCCL collectives determines whether GPUs compute or wait. Getting container networking right with Multus, SR-IOV, and GPUDirect is a viable infrastructure setup that makes running GPU-accelerated workloads on Kubernetes possible.
