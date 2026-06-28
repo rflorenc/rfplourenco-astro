@@ -3,6 +3,7 @@ title: "GPU Cluster Networking on Kubernetes"
 description: "An architectural deep-dive into how containers get direct GPU-to-network and GPU-to-storage access on Kubernetes with SR-IOV, Multus CNI, GPUDirect, and the full NVIDIA communication stack."
 date: 2026-06-28
 tags: ["ai", "kubernetes", "security"]
+featured: true
 ---
 
 In 1984, [John Gage coined "the network is the computer"](https://en.wikipedia.org/wiki/The_Network_is_the_Computer) as a slogan for Sun Microsystems. Four decades later, GPU clusters prove him right in the most literal sense. A single [NVIDIA H100 SXM delivers 3,958 TFLOPS of FP8 Tensor Core throughput](https://resources.nvidia.com/en-us-gpu-resources/h100-datasheet-24306) with [2:4 structured sparsity](https://developer.nvidia.com/blog/accelerating-inference-with-sparsity-using-ampere-and-tensorrt/), where exactly 2 out of every 4 weight elements are zero, letting the hardware skip half the multiply-accumulate operations. Even at the dense (non-sparse) rate of 1,979 TFLOPS, raw compute is generally not the limiting factor. What determines whether GPUs spend their cycles on matrix operations or stalling is the communication fabric: how fast gradients synchronize across devices, how quickly KV-cache is updated in inference stages, and how efficiently model weights load from storage.

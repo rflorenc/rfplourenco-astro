@@ -9,7 +9,8 @@ import { getCollection } from 'astro:content';
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const [latestPost, ...recentPosts] = allPosts;
+const featuredPost = allPosts.find((p) => p.data.featured) ?? allPosts[0];
+const recentPosts = allPosts.filter((p) => p.id !== featuredPost?.id);
 const displayPosts = recentPosts.slice(0, 3);
 
 const projects = (await getCollection('projects'))
@@ -56,12 +57,12 @@ allPosts.forEach((post) => post.data.tags.forEach((tag) => tagCounts.set(tag, (t
       <!-- Main content -->
       <div class="flex-1 min-w-0">
 
-        {latestPost && (
+        {featuredPost && (
           <section>
             <FeaturedPost
-              title={latestPost.data.title}
-              description={latestPost.data.description}
-              slug={latestPost.slug}
+              title={featuredPost.data.title}
+              description={featuredPost.data.description}
+              slug={featuredPost.slug}
             />
           </section>
         )}
