@@ -72,7 +72,7 @@ Multi-node changes the picture. [NVSwitch](https://www.nvidia.com/en-us/data-cen
 
 For infrastructure offloading, [BlueField-3 DPUs](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/documents/datasheet-nvidia-bluefield-3-dpu.pdf) move networking, security, and storage functions onto the SmartNIC's 16 Arm cores and 32 GB of onboard DDR5. The DPU handles SR-IOV management, RDMA configuration, and network policy enforcement without consuming host CPU cycles. In multi-tenant environments, this keeps isolation and resource accounting from impacting GPU workload performance.
 
-The [NVIDIA Network Operator](https://docs.nvidia.com/networking/display/cokan10/network-operator) complements the GPU Operator by managing MLNX_OFED drivers, RDMA device plugins, and secondary network configuration. Together they automate the full stack from driver installation through SR-IOV VF allocation to NCCL environment variable tuning.
+The [NVIDIA Network Operator](https://docs.nvidia.com/networking/display/kubernetes2410/nvidia+network+operator) complements the GPU Operator by managing MLNX_OFED drivers, RDMA device plugins, and secondary network configuration. Together they automate the full stack from driver installation through SR-IOV VF allocation to NCCL environment variable tuning.
 
 ## Closing Thoughts
 
