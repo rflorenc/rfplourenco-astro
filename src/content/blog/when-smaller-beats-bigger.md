@@ -3,6 +3,7 @@ title: "Why a 2B Model Beats an 8B Model: Evaluating LLMs Beyond Accuracy"
 description: "Accuracy alone does not tell you if a model is useful in production. A composite scoring framework reveals that architectural design matters more than parameter count."
 date: 2026-06-28
 tags: ["ai", "python"]
+draft: true
 ---
 
 We obsess over model size. A 70-billion-parameter model must be better than a 7-billion-parameter model, which must be better than a 2-billion-parameter model. More parameters, more knowledge, better results.

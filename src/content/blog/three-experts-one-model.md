@@ -3,6 +3,7 @@ title: "Three Experts, One Model: Making Small Language Models Reliable"
 description: "How multi-perspective prompting and self-verification can make small language models produce reliable predictions without scaling to larger, more expensive models."
 date: 2026-06-27
 tags: ["ai", "python"]
+draft: true
 ---
 
 When you have a serious medical concern, you do not rely on a single opinion. You see a specialist, maybe two. A cardiologist focuses on your heart. A neurologist focuses on your nervous system. A general practitioner looks at the whole picture. If two out of three agree on a diagnosis, you feel more confident. If all three agree, you are fairly certain.
